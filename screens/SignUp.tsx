@@ -1,13 +1,24 @@
 import React from 'react';
-import {StyleSheet, Text, TextInput, View, Button} from 'react-native';
+import {View, ViewStyle} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import {goToLogIn, goToHome} from '../components/navigation';
-import {IBaseComponent, IAuthState} from '../types/types';
+import {IBaseComponent, IAuthState} from '../types/screens';
+import {Button, Text, ThemeProvider, Theme, Input} from 'react-native-elements';
+import {theme} from '../styles/theme';
 
 export default class SignUp extends React.Component<
   IBaseComponent,
   IAuthState
 > {
+  static get options() {
+    return {
+      topBar: {
+        title: {
+          text: 'Sign up',
+        },
+      },
+    };
+  }
   state: IAuthState = {email: '', password: '', errorMessage: undefined};
   handleSignUp = () => {
     auth()
@@ -18,46 +29,35 @@ export default class SignUp extends React.Component<
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Sign Up</Text>
-        {this.state.errorMessage && (
-          <Text style={{color: 'red'}}>{this.state.errorMessage}</Text>
-        )}
-        <TextInput
-          placeholder="Email"
-          autoCapitalize="none"
-          style={styles.textInput}
-          onChangeText={email => this.setState({email})}
-          value={this.state.email}
-        />
-        <TextInput
-          secureTextEntry
-          placeholder="Password"
-          autoCapitalize="none"
-          style={styles.textInput}
-          onChangeText={password => this.setState({password})}
-          value={this.state.password}
-        />
-        <Button title="Sign Up" onPress={this.handleSignUp} />
-        <View>
-          <Text>Already have an account? </Text>
-          <Text onPress={goToLogIn}>Login</Text>
+      <ThemeProvider theme={theme as Theme}>
+        <View style={theme.spaceBetweenView as ViewStyle}>
+          <View style={theme.alignBottom as ViewStyle}>
+            <Input
+              autoCapitalize="none"
+              placeholder="Email"
+              onChangeText={email => this.setState({email})}
+              value={this.state.email}
+            />
+            <Input
+              secureTextEntry
+              autoCapitalize="none"
+              placeholder="Password"
+              onChangeText={password => this.setState({password})}
+              value={this.state.password}
+              errorMessage={this.state.errorMessage}
+            />
+          </View>
+          <View style={theme.bottomComponent as ViewStyle}>
+            <Button title="Sign up" onPress={this.handleSignUp} />
+            <View style={theme.oneLineText as ViewStyle}>
+              <Text>Don't have an account? </Text>
+              <Text style={theme.secondaryColor} onPress={goToLogIn}>
+                Log in
+              </Text>
+            </View>
+          </View>
         </View>
-      </View>
+      </ThemeProvider>
     );
   }
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  textInput: {
-    height: 40,
-    width: '90%',
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginTop: 8,
-  },
-});

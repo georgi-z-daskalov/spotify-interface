@@ -1,9 +1,9 @@
-export interface IBaseScreenProps {
+export interface IBaseComponent {
   componentId: string;
 }
 
-export interface ILoginState {
+export interface IAuthState {
   email: string;
   password: string;
-  errorMessage: string;
+  errorMessage?: string;
 }

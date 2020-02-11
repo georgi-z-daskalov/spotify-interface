@@ -2,7 +2,7 @@ import React from 'react';
 import {View, Text, Button, StyleSheet} from 'react-native';
 import auth from '@react-native-firebase/auth';
 import {goToLogIn, navPushTo} from '../components/navigation';
-import {IBaseComponent} from '../types/types';
+import {IBaseComponent} from '../types/screens';
 
 export default class Home extends React.Component<IBaseComponent> {
   static get options() {

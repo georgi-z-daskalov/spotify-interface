@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Text, Button, StyleSheet} from 'react-native';
 import {Navigation} from 'react-native-navigation';
-import {IBaseComponent} from '../types/types';
+import {IBaseComponent} from '../types/screens';
 
 export default class Screen2 extends React.Component<IBaseComponent> {
   static get options() {

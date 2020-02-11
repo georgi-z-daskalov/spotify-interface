@@ -1,28 +1,45 @@
 import React from 'react';
 import {View, ViewStyle} from 'react-native';
 import auth from '@react-native-firebase/auth';
-import {goToSignUp, goToHome, goToForgotPass} from '../components/navigation';
+import {goToLogIn} from '../components/navigation';
 import {IBaseComponent, IAuthState} from '../types/screens';
 import {Button, Input, Text, ThemeProvider, Theme} from 'react-native-elements';
 import {theme} from '../styles/theme';
 
-export default class Login extends React.Component<IBaseComponent, IAuthState> {
+const actionCodeSettings = {
+  url: 'https://spotifyinterface.page.link',
+  iOS: {
+    bundleId: 'org.reactjs.native.example.SpotifyInterface',
+  },
+  android: {
+    packageName: 'com.spotifyinterface',
+    installApp: true,
+  },
+  handleCodeInApp: true,
+};
+
+export default class ForgottenPassword extends React.Component<IBaseComponent> {
   static get options() {
     return {
       topBar: {
         title: {
-          text: 'Login',
+          text: 'Forgotten password',
         },
       },
     };
   }
-  state: IAuthState = {email: '', password: '', errorMessage: '\n'};
-  handleLogin = () => {
-    const {email, password} = this.state;
+  state = {email: '', errorMessage: ' '};
+  handleResetPassword = () => {
+    const {email} = this.state;
+
+    console.log('handleResetPassword', email);
     auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(() => goToHome())
-      .catch(error => this.setState({errorMessage: error.message}));
+      .sendPasswordResetEmail(email)
+      .then(() => goToLogIn())
+      .catch(error => {
+        console.log('error', error.message);
+        this.setState({errorMessage: error.message});
+      });
   };
 
   render() {
@@ -35,25 +52,15 @@ export default class Login extends React.Component<IBaseComponent, IAuthState> {
               placeholder="Email"
               onChangeText={email => this.setState({email})}
               value={this.state.email}
-            />
-            <Input
-              secureTextEntry
-              autoCapitalize="none"
-              placeholder="Password"
-              onChangeText={password => this.setState({password})}
-              value={this.state.password}
               errorMessage={this.state.errorMessage}
             />
           </View>
           <View style={theme.bottomComponent as ViewStyle}>
-            <Button title="Log in" onPress={this.handleLogin} />
-            <Text style={theme.secondaryColor} onPress={goToForgotPass}>
-              Forgot password
-            </Text>
+            <Button title="Reset password" onPress={this.handleResetPassword} />
             <View style={theme.oneLineText as ViewStyle}>
-              <Text>Don't have an account? </Text>
-              <Text style={theme.secondaryColor} onPress={goToSignUp}>
-                Sign Up
+              <Text>Remember password? </Text>
+              <Text style={theme.secondaryColor} onPress={goToLogIn}>
+                Log in
               </Text>
             </View>
           </View>

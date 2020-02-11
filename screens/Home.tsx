@@ -1,8 +1,10 @@
 import React from 'react';
-import {View, Text, Button, StyleSheet} from 'react-native';
+import {View} from 'react-native';
+import {Text, Button, ThemeProvider, Theme} from 'react-native-elements';
 import auth from '@react-native-firebase/auth';
-import {goToLogIn, navPushTo} from '../components/navigation';
+import {goToLogIn, displayPlayer} from '../components/navigation';
 import {IBaseComponent} from '../types/screens';
+import {theme} from '../styles/theme';
 
 export default class Home extends React.Component<IBaseComponent> {
   static get options() {
@@ -22,22 +24,12 @@ export default class Home extends React.Component<IBaseComponent> {
   };
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Hello from Home screen.</Text>
-        <Button onPress={this.logout} title="Sign Out" />
-        <Button
-          onPress={() => navPushTo(this.props.componentId, 'Screen2')}
-          title="View next screen"
-        />
-      </View>
+      <ThemeProvider theme={theme as Theme}>
+        <View style={[theme.container, theme.mainWrapper]}>
+          <Text>Hello from Home screen.</Text>
+          <Button onPress={displayPlayer} title="Show player" />
+        </View>
+      </ThemeProvider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});

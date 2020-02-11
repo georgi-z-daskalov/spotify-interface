@@ -1,7 +1,9 @@
-const MEDIUM_SIZE = 13;
-const LARGE_SIZE = 15;
-const PRIMARY_COLOR = 'teal';
-const SECONDARY_COLOR = 'orangered';
+export const MEDIUM_SIZE = 13;
+export const LARGE_SIZE = 15;
+export const PRIMARY_COLOR = 'teal';
+export const SECONDARY_COLOR = 'orangered';
+export const DARK_GREY_COLOR = '#212121';
+export const PRIMARY_TEXT_COLOR = '#fefefe';
 
 const multiplySize = (multiply, size) => multiply * size;
 
@@ -11,7 +13,13 @@ export const theme = {
     secondary: SECONDARY_COLOR,
   },
   Text: {
-    fontSize: MEDIUM_SIZE,
+    style: {
+      color: PRIMARY_TEXT_COLOR,
+      fontSize: MEDIUM_SIZE,
+    },
+  },
+  View: {
+    backgroundColor: DARK_GREY_COLOR,
   },
   Button: {
     raised: true,
@@ -56,5 +64,11 @@ export const theme = {
   },
   secondaryColor: {
     color: SECONDARY_COLOR,
+  },
+  mainWrapper: {
+    backgroundColor: DARK_GREY_COLOR,
+  },
+  player: {
+    backgroundColor: DARK_GREY_COLOR,
   },
 };

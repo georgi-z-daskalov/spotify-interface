@@ -1,8 +1,12 @@
+export const XSMALL_SIZE = 7;
+export const SMALL_SIZE = 11;
 export const MEDIUM_SIZE = 13;
 export const LARGE_SIZE = 15;
 export const PRIMARY_COLOR = 'teal';
 export const SECONDARY_COLOR = 'orangered';
+export const LIGHT_GREY_COLOR = '#e0e0e0';
 export const DARK_GREY_COLOR = '#212121';
+export const BLACK_COLOR = '#000000';
 export const PRIMARY_TEXT_COLOR = '#fefefe';
 
 const multiplySize = (multiply, size) => multiply * size;
@@ -70,5 +74,55 @@ export const theme = {
   },
   player: {
     backgroundColor: DARK_GREY_COLOR,
+  },
+  playerBarWrap: {
+    width: '100%',
+    height: 60,
+    position: 'absolute',
+    bottom: 0,
+    backgroundColor: DARK_GREY_COLOR,
+  },
+  playerBar: {
+    flexDirection: 'row',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    height: 60,
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    borderBottomColor: BLACK_COLOR,
+    borderBottomWidth: 0.5,
+    album: {
+      width: 58,
+      height: 58,
+    },
+    trackPosition: {
+      height: 1,
+      backgroundColor: LIGHT_GREY_COLOR,
+      position: 'absolute',
+      top: 0,
+      left: 0,
+    },
+    infoText: {
+      flexDirection: 'row',
+      flex: 1,
+      marginLeft: MEDIUM_SIZE,
+      marginRight: LARGE_SIZE,
+      song: {
+        fontSize: SMALL_SIZE,
+        fontWeight: 'bold',
+      },
+      artist: {
+        fontSize: SMALL_SIZE,
+        color: LIGHT_GREY_COLOR,
+      },
+    },
+    buttons: {
+      marginRight: LARGE_SIZE,
+      width: MEDIUM_SIZE,
+      height: MEDIUM_SIZE,
+    },
   },
 };

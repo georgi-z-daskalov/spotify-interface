@@ -35,7 +35,7 @@ export const goToHome = () =>
               name: 'Home',
               options: {
                 bottomTab: {
-                  text: '',
+                  text: 'Home',
                   icon: require('../assets/img/home.png'),
                   selectedIcon: require('../assets/img/home_active.png'),
                 },
@@ -47,7 +47,7 @@ export const goToHome = () =>
               name: 'Search',
               options: {
                 bottomTab: {
-                  text: '',
+                  text: 'Search',
                   icon: require('../assets/img/search.png'),
                   selectedIcon: require('../assets/img/search_active.png'),
                 },

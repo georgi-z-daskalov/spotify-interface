@@ -11,12 +11,11 @@ import {Image, ThemeProvider, Text, Theme} from 'react-native-elements';
 import {displayPlayer} from '../components/navigation';
 import {theme} from '../styles/theme';
 import currentContext from '../assets/mock_server/currently_playing_context';
-import currentTrack from '../assets/mock_server/current_track';
 
 export default class PlayerBar extends React.Component {
   state = {
-    isPlaying: false,
-    isLiked: false,
+    isPlaying: currentContext.item.is_playing,
+    isLiked: currentContext.item.item.is_local,
   };
 
   togglePlay = () => {
@@ -39,9 +38,15 @@ export default class PlayerBar extends React.Component {
       ? require('../assets/img/heart_active.png')
       : require('../assets/img/heart.png');
     const trackCurrentPosition: string =
-      (Number(currentContext.progress_ms) / Number(currentTrack.duration_ms)) *
+      (Number(currentContext.item.progress_ms) /
+        Number(currentContext.item.item.duration_ms)) *
         100 +
       '%';
+    const albumName = currentContext.item.item.album.name;
+    const albumCover = currentContext.item.item.album.images.find(
+      img => img.height === 64,
+    );
+    const artistName = currentContext.item.item.artists[0].name;
 
     return (
       <ThemeProvider theme={theme as Theme}>
@@ -57,24 +62,23 @@ export default class PlayerBar extends React.Component {
                 ] as ViewStyle
               }
             />
-            <Image
-              style={theme.playerBar.album}
-              source={require('../assets/img/album.jpg')}
-            />
+            {albumCover && (
+              <Image
+                style={theme.playerBar.album}
+                source={{uri: albumCover.url}}
+              />
+            )}
             <ScrollView
               horizontal={true}
               showsHorizontalScrollIndicator={false}
               style={theme.playerBar.infoText as ViewStyle}>
               <TouchableOpacity style={theme.oneLineText as ViewStyle}>
                 <Text style={theme.playerBar.infoText.song as TextStyle}>
-                  {currentContext.item.name}
+                  {artistName}
                 </Text>
                 <Text style={theme.playerBar.infoText.artist as TextStyle}>
                   {' '}
-                  · {currentContext.item.artists[0]}{' '}
-                  {currentContext.item.artists[0]}{' '}
-                  {currentContext.item.artists[0]}{' '}
-                  {currentContext.item.artists[0]}{' '}
+                  · {albumName}
                 </Text>
               </TouchableOpacity>
             </ScrollView>

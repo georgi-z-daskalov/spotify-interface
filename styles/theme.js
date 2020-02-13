@@ -2,6 +2,9 @@ export const XSMALL_SIZE = 7;
 export const SMALL_SIZE = 11;
 export const MEDIUM_SIZE = 13;
 export const LARGE_SIZE = 15;
+export const XLARGE_SIZE = 19;
+export const XXLARGE_SIZE = 23;
+export const XXXLARGE_SIZE = 27;
 export const PRIMARY_COLOR = 'teal';
 export const SECONDARY_COLOR = 'orangered';
 export const LIGHT_GREY_COLOR = '#e0e0e0';
@@ -125,6 +128,38 @@ export const theme = {
       marginRight: LARGE_SIZE,
       width: LARGE_SIZE,
       height: LARGE_SIZE,
+    },
+  },
+  homeSection: {
+    paddingLeft: SMALL_SIZE,
+    paddingRight: SMALL_SIZE,
+    paddingTop: XLARGE_SIZE,
+    sectionHeader: {
+      fontSize: multiplySize(2, SMALL_SIZE),
+      color: PRIMARY_TEXT_COLOR,
+      fontWeight: 'bold',
+      marginBottom: SMALL_SIZE,
+      marginTop: LARGE_SIZE,
+    },
+    list: {},
+    recentlyPlayedListItem: {
+      width: 135,
+      img: {
+        width: 125,
+        height: 125,
+        marginBottom: SMALL_SIZE,
+      },
+      trackName: {
+        fontSize: MEDIUM_SIZE,
+        color: PRIMARY_TEXT_COLOR,
+        fontWeight: 'bold',
+        width: 120,
+      },
+      albumInfo: {
+        fontSize: MEDIUM_SIZE,
+        color: LIGHT_GREY_COLOR,
+        width: '85%',
+      },
     },
   },
 };

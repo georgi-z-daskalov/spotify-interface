@@ -31,13 +31,10 @@ export default class ForgottenPassword extends React.Component<IBaseComponent> {
   state = {email: '', errorMessage: ' '};
   handleResetPassword = () => {
     const {email} = this.state;
-
-    console.log('handleResetPassword', email);
     auth()
       .sendPasswordResetEmail(email)
       .then(() => goToLogIn())
       .catch(error => {
-        console.log('error', error.message);
         this.setState({errorMessage: error.message});
       });
   };

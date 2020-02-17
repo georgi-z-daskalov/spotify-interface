@@ -24,7 +24,7 @@ export const goToHome = () =>
       bottomTabs: {
         options: {
           bottomTabs: {
-            animate: true, // Controls whether BottomTabs visibility changes should be animated
+            animate: true,
             backgroundColor: DARK_GREY_COLOR,
           },
         },

@@ -1,14 +1,18 @@
 import React from 'react';
-import {View, ViewStyle} from 'react-native';
+import {View, ViewStyle, Modal} from 'react-native';
 import {IBaseComponent, IAuthState} from '../types/screens';
-import {Button, ThemeProvider, Theme} from 'react-native-elements';
+import {
+  Button,
+  ThemeProvider,
+  Theme,
+  Header,
+  Text,
+} from 'react-native-elements';
 import {theme} from '../styles/theme';
 import {Navigation} from 'react-native-navigation';
+import {HidePlayerButton} from '../components/HidePlayerButton';
 
-export default class Player extends React.Component<
-  IBaseComponent,
-  IAuthState
-> {
+export default class Player extends React.Component<IBaseComponent> {
   static get options() {
     return {
       topBar: {
@@ -18,14 +22,19 @@ export default class Player extends React.Component<
       },
     };
   }
-  state: IAuthState = {email: '', password: '', errorMessage: '\n'};
   hidePlayer = () => Navigation.dismissOverlay(this.props.componentId);
 
   render() {
     return (
       <ThemeProvider theme={theme as Theme}>
-        <View style={[theme.container, theme.player] as ViewStyle}>
-          <Button title="Hide Player" onPress={this.hidePlayer} />
+        <View style={theme.player as ViewStyle}>
+          <Modal animationType="slide" transparent={false} visible={true}>
+            <View>
+              <HidePlayerButton componentId={this.props.componentId} />
+              <Text>Current track name</Text>
+            </View>
+            <Button title="Hide Player" onPress={this.hidePlayer} />
+          </Modal>
         </View>
       </ThemeProvider>
     );

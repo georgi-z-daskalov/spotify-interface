@@ -18,7 +18,10 @@ interface IPlayerBarState {
   isLiked: boolean;
 }
 
-export default class PlayerBar extends React.Component<null, IPlayerBarState> {
+export default class PlayerBar extends React.Component<
+  object,
+  IPlayerBarState
+> {
   state: IPlayerBarState = {
     isPlaying: currentContext.item.is_playing,
     isLiked: currentContext.item.item.is_local,

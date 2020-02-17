@@ -79,6 +79,8 @@ export const theme = {
   },
   player: {
     backgroundColor: DARK_GREY_COLOR,
+    flex: 1,
+    alignItems: 'center',
   },
   playerBarWrap: {
     width: '100%',

@@ -46,6 +46,25 @@ interface IAlbum {
   images: IAlbumImage[];
 }
 
+enum HomeListTypes {
+  RECENTLY_PLAYED,
+  TOP_ARTISTS,
+  PLAYLISTS,
+}
+
+const getListType = (list: string): HomeListTypes => {
+  switch (list) {
+    case 'recently_played':
+      return HomeListTypes.RECENTLY_PLAYED;
+    case 'top_artists':
+      return HomeListTypes.TOP_ARTISTS;
+    case 'playlists':
+      return HomeListTypes.PLAYLISTS;
+    default:
+      return HomeListTypes.RECENTLY_PLAYED;
+  }
+};
+
 export default class RenderHomeList extends React.Component<
   IRenderHomeListProps
 > {
@@ -59,6 +78,7 @@ export default class RenderHomeList extends React.Component<
       },
     };
   };
+
   getTopArtistsItems = (artist: IArtistProps) => {
     const {name, images} = artist;
 
@@ -69,6 +89,7 @@ export default class RenderHomeList extends React.Component<
       },
     };
   };
+
   getRecentlyPlayedProps = (): IHomeListProps => {
     const recentlyPlayed = require('../assets/mock_server/recently_played');
     const items = recentlyPlayed.default.items;
@@ -78,6 +99,7 @@ export default class RenderHomeList extends React.Component<
       items: items.map(this.getRecentlyPlayedItems),
     };
   };
+
   getTopArtistsProps = (): IHomeListProps => {
     const topArtists = require('../assets/mock_server/top_artists');
     const items = topArtists.default.items;
@@ -87,6 +109,7 @@ export default class RenderHomeList extends React.Component<
       items: items.map(this.getTopArtistsItems),
     };
   };
+
   getPlaylistsProps = (): IHomeListProps => {
     const topArtists = require('../assets/mock_server/playlists');
     const items = topArtists.default.items;
@@ -96,16 +119,17 @@ export default class RenderHomeList extends React.Component<
       items: items.map(this.getTopArtistsItems),
     };
   };
+
   getHomeListProps(list: string) {
     let homeListProps = {} as IHomeListProps;
-    switch (list) {
-      case 'recently_played':
+    switch (getListType(list)) {
+      case HomeListTypes.RECENTLY_PLAYED:
         homeListProps = this.getRecentlyPlayedProps();
         return this.renderHomeList(homeListProps);
-      case 'top_artists':
+      case HomeListTypes.TOP_ARTISTS:
         homeListProps = this.getTopArtistsProps();
         return this.renderHomeList(homeListProps);
-      case 'playlists':
+      case HomeListTypes.PLAYLISTS:
         homeListProps = this.getPlaylistsProps();
         return this.renderHomeList(homeListProps);
       default:

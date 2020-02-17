@@ -1,17 +1,9 @@
 import React from 'react';
-import {Navigation} from 'react-native-navigation';
-import {Button} from 'react-native-elements';
 import {TouchableHighlight, Image} from 'react-native';
 
-const hidePlayer = (id: string): void => {
-  Navigation.dismissOverlay(id);
-};
-export const HidePlayerButton = ({componentId}: {componentId: string}) => {
+export const HidePlayerButton = ({onClick}: {onClick: () => void}) => {
   return (
-    <TouchableHighlight
-      onPress={() => {
-        hidePlayer(componentId);
-      }}>
+    <TouchableHighlight onPress={onClick}>
       <Image
         source={require('../assets/img/arrow_down.png')}
         style={{width: 15, height: 15}}

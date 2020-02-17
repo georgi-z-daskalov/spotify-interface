@@ -1,36 +1,25 @@
 import React from 'react';
 import {View, ViewStyle, Modal} from 'react-native';
-import {IBaseComponent, IAuthState} from '../types/screens';
-import {
-  Button,
-  ThemeProvider,
-  Theme,
-  Header,
-  Text,
-} from 'react-native-elements';
+import {Button, ThemeProvider, Theme, Text} from 'react-native-elements';
 import {theme} from '../styles/theme';
-import {Navigation} from 'react-native-navigation';
 import {HidePlayerButton} from '../components/HidePlayerButton';
+import {RootState} from '../reducers/index';
+import {connect, ConnectedProps} from 'react-redux';
+import {PlayerActions} from '../types/actions';
 
-export default class Player extends React.Component<IBaseComponent> {
-  static get options() {
-    return {
-      topBar: {
-        title: {
-          text: 'Login',
-        },
-      },
-    };
-  }
-  hidePlayer = () => Navigation.dismissOverlay(this.props.componentId);
+class Player extends React.Component<IPlayerProps> {
+  hidePlayer = () => this.props.dispatch({type: PlayerActions.HIDE_PLAYER});
 
   render() {
     return (
       <ThemeProvider theme={theme as Theme}>
         <View style={theme.player as ViewStyle}>
-          <Modal animationType="slide" transparent={false} visible={true}>
+          <Modal
+            animationType="slide"
+            transparent={false}
+            visible={this.props.isVisible}>
             <View>
-              <HidePlayerButton componentId={this.props.componentId} />
+              <HidePlayerButton onClick={this.hidePlayer} />
               <Text>Current track name</Text>
             </View>
             <Button title="Hide Player" onPress={this.hidePlayer} />
@@ -40,3 +29,11 @@ export default class Player extends React.Component<IBaseComponent> {
     );
   }
 }
+
+const mapState = (state: RootState) => ({
+  isVisible: state.player.isVisible,
+});
+const connector = connect(mapState);
+type IPlayerProps = ConnectedProps<typeof connector>;
+
+export default connector(Player);

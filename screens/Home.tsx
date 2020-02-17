@@ -6,6 +6,9 @@ import {theme} from '../styles/theme';
 import PlayerBar from '../components/PlayerBar';
 import RenderHomeList from '../components/RenderHomeList';
 import {getConfigHomeList} from '../utils/config';
+import Player from './Player';
+import {Provider} from 'react-redux';
+import {store} from '../reducers/index';
 
 export default class Home extends React.Component<IBaseComponent> {
   static get options() {
@@ -19,12 +22,15 @@ export default class Home extends React.Component<IBaseComponent> {
   }
   render() {
     return (
-      <ThemeProvider theme={theme as Theme}>
-        <View style={[theme.container, theme.mainWrapper] as ViewStyle}>
-          <RenderHomeList homeLists={getConfigHomeList()} />
-          <PlayerBar />
-        </View>
-      </ThemeProvider>
+      <Provider store={store}>
+        <ThemeProvider theme={theme as Theme}>
+          <View style={[theme.container, theme.mainWrapper] as ViewStyle}>
+            <RenderHomeList homeLists={getConfigHomeList()} />
+            <PlayerBar />
+            <Player />
+          </View>
+        </ThemeProvider>
+      </Provider>
     );
   }
 }

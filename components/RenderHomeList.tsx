@@ -125,21 +125,21 @@ export default class RenderHomeList extends React.Component<
     switch (getListType(list)) {
       case HomeListTypes.RECENTLY_PLAYED:
         homeListProps = this.getRecentlyPlayedProps();
-        return this.renderHomeList(homeListProps);
+        return this.renderHomeList(homeListProps, list);
       case HomeListTypes.TOP_ARTISTS:
         homeListProps = this.getTopArtistsProps();
-        return this.renderHomeList(homeListProps);
+        return this.renderHomeList(homeListProps, list);
       case HomeListTypes.PLAYLISTS:
         homeListProps = this.getPlaylistsProps();
-        return this.renderHomeList(homeListProps);
+        return this.renderHomeList(homeListProps, list);
       default:
         null;
     }
   }
 
-  renderHomeList(homeListType: IHomeListProps) {
+  renderHomeList(homeListType: IHomeListProps, listType: string) {
     return (
-      <View style={theme.homeSection}>
+      <View key={listType} style={theme.homeSection}>
         <Text style={theme.homeSection.sectionHeader as ViewStyle}>
           {homeListType.title}
         </Text>
@@ -147,7 +147,7 @@ export default class RenderHomeList extends React.Component<
           style={theme.homeSection.list}
           showsHorizontalScrollIndicator={false}
           horizontal={true}
-          keyExtractor={(item, index) => index + String(item)}
+          keyExtractor={(item, index) => index + JSON.stringify(item)}
           data={homeListType.items}
           renderItem={({item}: {item: IHomeListItemProps}) => (
             <HomeListItem {...item} />

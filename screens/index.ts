@@ -3,7 +3,6 @@ import {Navigation} from 'react-native-navigation';
 export function registerScreens() {
   Navigation.registerComponent('Home', () => require('./Home').default);
   Navigation.registerComponent('Search', () => require('./Search').default);
-  Navigation.registerComponent('Player', () => require('./Player').default);
   Navigation.registerComponent('Loading', () => require('./Loading').default);
   Navigation.registerComponent('Login', () => require('./LogIn').default);
   Navigation.registerComponent(

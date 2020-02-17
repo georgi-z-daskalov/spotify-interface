@@ -8,18 +8,25 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {Image, ThemeProvider, Text, Theme} from 'react-native-elements';
-import {displayPlayer} from '../components/navigation';
 import {theme} from '../styles/theme';
 import currentContext from '../assets/mock_server/currently_playing_context';
 import Toast from 'react-native-simple-toast';
+import {connect} from 'react-redux';
+import {IBaseComponent} from '../types/screens';
+import {AppDispatch} from '../reducers';
+import {PlayerActions} from '../types/actions';
 
 interface IPlayerBarState {
   isPlaying: boolean;
   isLiked: boolean;
 }
 
-export default class PlayerBar extends React.Component<
-  object,
+interface IPlayerBarProps extends IBaseComponent {
+  dispatch: AppDispatch;
+}
+
+export class PlayerBar extends React.Component<
+  IPlayerBarProps,
   IPlayerBarState
 > {
   state: IPlayerBarState = {
@@ -44,6 +51,10 @@ export default class PlayerBar extends React.Component<
     });
   };
 
+  displayPlayer = () => {
+    this.props.dispatch({type: PlayerActions.SHOW_PLAYER});
+  };
+
   render() {
     const playPauseImg = this.state.isPlaying
       ? require('../assets/img/play.png')
@@ -66,7 +77,7 @@ export default class PlayerBar extends React.Component<
       <ThemeProvider theme={theme as Theme}>
         <TouchableHighlight
           style={theme.playerBarWrap as ViewStyle}
-          onPress={displayPlayer}>
+          onPress={this.displayPlayer}>
           <View style={theme.playerBar as ViewStyle}>
             <View
               style={
@@ -108,3 +119,5 @@ export default class PlayerBar extends React.Component<
     );
   }
 }
+
+export default connect<IPlayerBarProps, AppDispatch>(null)(PlayerBar);

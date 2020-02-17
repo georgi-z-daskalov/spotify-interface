@@ -135,7 +135,7 @@ export default class RenderHomeList extends React.Component<
 
   render() {
     return (
-      <ScrollView>
+      <ScrollView style={theme.homeSection.scroll}>
         {this.props.homeLists.map((list: string) =>
           this.getHomeListProps(list),
         )}

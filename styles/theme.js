@@ -134,6 +134,9 @@ export const theme = {
     paddingLeft: SMALL_SIZE,
     paddingRight: SMALL_SIZE,
     paddingTop: XLARGE_SIZE,
+    scroll: {
+      marginBottom: ALBUM_IMG_SIZE + MEDIUM_SIZE,
+    },
     sectionHeader: {
       fontSize: multiplySize(2, SMALL_SIZE),
       color: PRIMARY_TEXT_COLOR,

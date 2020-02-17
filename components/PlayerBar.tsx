@@ -11,9 +11,15 @@ import {Image, ThemeProvider, Text, Theme} from 'react-native-elements';
 import {displayPlayer} from '../components/navigation';
 import {theme} from '../styles/theme';
 import currentContext from '../assets/mock_server/currently_playing_context';
+import Toast from 'react-native-simple-toast';
 
-export default class PlayerBar extends React.Component {
-  state = {
+interface IPlayerBarState {
+  isPlaying: boolean;
+  isLiked: boolean;
+}
+
+export default class PlayerBar extends React.Component<null, IPlayerBarState> {
+  state: IPlayerBarState = {
     isPlaying: currentContext.item.is_playing,
     isLiked: currentContext.item.item.is_local,
   };
@@ -25,8 +31,13 @@ export default class PlayerBar extends React.Component {
   };
 
   toggleIsLiked = () => {
-    this.setState({
-      isLiked: !this.state.isLiked,
+    this.setState((prevState: IPlayerBarState) => {
+      Toast.show(
+        prevState.isLiked ? 'Removed from Liked Songs' : 'Added to Liked Songs',
+      );
+      return {
+        isLiked: !prevState.isLiked,
+      };
     });
   };
 

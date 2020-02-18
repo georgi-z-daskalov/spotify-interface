@@ -78,9 +78,143 @@ export const theme = {
     backgroundColor: DARK_GREY_COLOR,
   },
   player: {
+    alignItems: 'center',
     backgroundColor: DARK_GREY_COLOR,
     flex: 1,
-    alignItems: 'center',
+    width: '100%',
+    height: '100%',
+    header: {
+      backgroundColor: DARK_GREY_COLOR,
+    },
+    hidebutton: {
+      width: LARGE_SIZE,
+      height: LARGE_SIZE,
+      alignItems: 'center',
+      marginLeft: LARGE_SIZE,
+      marginRight: LARGE_SIZE,
+    },
+    hidebuttonimage: {
+      width: LARGE_SIZE,
+      height: LARGE_SIZE,
+    },
+    info: {
+      width: '100%',
+    },
+    infotext: {
+      color: '#FFF',
+      fontSize: LARGE_SIZE,
+      textAlign: 'center',
+    },
+    album: {
+      flex: 2,
+      backgroundColor: DARK_GREY_COLOR,
+      width: '100%',
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingTop: multiplySize(2, LARGE_SIZE),
+      paddingRight: multiplySize(2, LARGE_SIZE),
+      paddingBottom: multiplySize(2, LARGE_SIZE),
+      paddingLeft: multiplySize(2, LARGE_SIZE),
+    },
+    albumimage: {
+      width: '100%',
+      height: '100%',
+    },
+    trackinfo: {
+      flexDirection: 'row',
+      width: '100%',
+      paddingLeft: multiplySize(2, LARGE_SIZE),
+      paddingRight: multiplySize(2, LARGE_SIZE),
+      justifyContent: 'space-between',
+      text: {
+        trackname: {
+          color: LIGHT_GREY_COLOR,
+          fontSize: multiplySize(2, SMALL_SIZE),
+          fontWeight: 'bold',
+        },
+        albumname: {
+          color: LIGHT_GREY_COLOR,
+          fontSize: LARGE_SIZE,
+        },
+      },
+      save: {
+        justifyContent: 'center',
+        button: {
+          width: 20,
+          height: 20,
+        },
+      },
+    },
+    slider: {
+      flex: 1,
+      paddingLeft: multiplySize(2, LARGE_SIZE),
+      paddingRight: multiplySize(2, LARGE_SIZE),
+      alignItems: 'stretch',
+      justifyContent: 'center',
+      width: '100%',
+      thumb: {
+        backgroundColor: '#FFF',
+        width: MEDIUM_SIZE,
+        height: MEDIUM_SIZE,
+      },
+      track: {
+        shadowColor: 'black',
+        height: 3,
+        borderRadius: 0,
+        backgroundColor: '#303030',
+      },
+      text: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        min: {
+          color: LIGHT_GREY_COLOR,
+          fontSize: MEDIUM_SIZE,
+        },
+        max: {
+          fontSize: MEDIUM_SIZE,
+          color: LIGHT_GREY_COLOR,
+        },
+      },
+    },
+    controls: {
+      flexDirection: 'row',
+      height: 100,
+      shuffle: {
+        flex: 1,
+        image: {
+          width: 25,
+          height: 25,
+        },
+      },
+      previos: {
+        flex: 1,
+        image: {
+          width: 25,
+          height: 25,
+        },
+      },
+      play: {
+        flex: 1,
+        image: {
+          width: 25,
+          height: 25,
+        },
+      },
+      next: {
+        flex: 1,
+        image: {
+          width: 25,
+          height: 25,
+        },
+      },
+      repeat: {
+        flex: 1,
+        image: {
+          width: 25,
+          height: 25,
+        },
+      },
+    },
   },
   playerBarWrap: {
     width: '100%',

@@ -16,7 +16,7 @@ import {IBaseComponent} from '../types/screens';
 import {AppDispatch} from '../reducers';
 import {PlayerActions} from '../types/actions';
 
-interface IPlayerBarState {
+export interface IPlayerBarState {
   isPlaying: boolean;
   isLiked: boolean;
 }

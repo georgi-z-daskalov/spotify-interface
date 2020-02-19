@@ -9,12 +9,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    NSURL *jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
-    [ReactNativeNavigation bootstrap:jsCodeLocation launchOptions:launchOptions];
-
     if ([FIRApp defaultApp] == nil) {
       [FIRApp configure];
     }
+    NSURL *jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];
+    [ReactNativeNavigation bootstrap:jsCodeLocation launchOptions:launchOptions];
+
 
     return YES;
 }

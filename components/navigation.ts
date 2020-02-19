@@ -1,5 +1,5 @@
 import {Navigation} from 'react-native-navigation';
-import {DARK_GREY_COLOR} from '../styles/theme';
+import {DARK_GREY_COLOR, PRIMARY_TEXT_COLOR, MEDIUM_GREY_COLOR} from '../styles/theme';
 
 export const goTo = (componentName: string): void => {
   Navigation.setRoot({
@@ -24,7 +24,7 @@ export const goToHome = () =>
       bottomTabs: {
         options: {
           bottomTabs: {
-            animate: true,
+            animate: false,
             backgroundColor: DARK_GREY_COLOR,
           },
         },
@@ -38,6 +38,8 @@ export const goToHome = () =>
                   text: 'Home',
                   icon: require('../assets/img/home.png'),
                   selectedIcon: require('../assets/img/home_active.png'),
+                  textColor: PRIMARY_TEXT_COLOR,
+                  selectedTextColor: PRIMARY_TEXT_COLOR,
                 },
               },
             },
@@ -50,6 +52,8 @@ export const goToHome = () =>
                   text: 'Search',
                   icon: require('../assets/img/search.png'),
                   selectedIcon: require('../assets/img/search_active.png'),
+                  textColor: PRIMARY_TEXT_COLOR,
+                  selectedTextColor: PRIMARY_TEXT_COLOR,
                 },
               },
             },

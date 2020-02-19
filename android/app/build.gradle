@@ -185,6 +185,7 @@ dependencies {
     implementation project(':react-native-navigation')
     implementation project(path: ":@react-native-firebase_app")
     implementation project(path: ":@react-native-firebase_auth")
+    implementation project(':react-native-linear-gradient')
 
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";

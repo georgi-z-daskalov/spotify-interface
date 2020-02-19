@@ -17,6 +17,8 @@ import com.reactnativenavigation.react.ReactGateway;
 
 import io.invertase.firebase.app.ReactNativeFirebaseAppPackage;
 import io.invertase.firebase.auth.ReactNativeFirebaseAuthPackage;
+import com.horcrux.svg.SvgPackage;
+import com.BV.LinearGradient.LinearGradientPackage;
 
 public class MainApplication extends NavigationApplication {
 
@@ -41,7 +43,9 @@ public class MainApplication extends NavigationApplication {
         // No need to add RnnPackage and MainReactPackage
         return Arrays.<ReactPackage>asList(
             new ReactNativeFirebaseAppPackage(),
-            new ReactNativeFirebaseAuthPackage()
+            new ReactNativeFirebaseAuthPackage(),
+            new SvgPackage(),
+            new LinearGradientPackage()
         );
     }
 

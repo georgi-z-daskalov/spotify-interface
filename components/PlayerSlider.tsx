@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import {View, ViewStyle, Modal, Image, TouchableHighlight} from 'react-native';
+import {View, ViewStyle} from 'react-native';
 import {Text, Slider} from 'react-native-elements';
-import {theme} from '../styles/theme';
+import {theme, MEDIUM_GREY_COLOR, PRIMARY_TEXT_COLOR} from '../styles/theme';
 
 const TRACK_LENGTH = 360000;
 
@@ -23,8 +23,8 @@ export const PlayerSlider = () => {
         maximumValue={TRACK_LENGTH}
         value={progress}
         onValueChange={value => setProgress(value)}
-        minimumTrackTintColor={'#ffffff'}
-        maximumTrackTintColor={'#666666'}
+        minimumTrackTintColor={PRIMARY_TEXT_COLOR}
+        maximumTrackTintColor={MEDIUM_GREY_COLOR}
       />
       <View style={theme.player.slider.text as ViewStyle}>
         <Text>{millisToMinutesAndSeconds(progress)}</Text>

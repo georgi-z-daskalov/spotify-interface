@@ -8,7 +8,12 @@ export const XXXLARGE_SIZE = 27;
 export const PRIMARY_COLOR = 'teal';
 export const SECONDARY_COLOR = 'orangered';
 export const LIGHT_GREY_COLOR = '#e0e0e0';
-export const DARK_GREY_COLOR = '#212121';
+export const MEDIUM_GREY_COLOR = '#888888';
+export const COLOR_START_PLAYER = '#666666';
+export const COLOR_END_PLAYER = '#222222';
+export const COLOR_START_HOME = '#666666';
+export const COLOR_END_HOME = '#222222';
+export const DARK_GREY_COLOR = '#222326';
 export const BLACK_COLOR = '#000000';
 export const PRIMARY_TEXT_COLOR = '#fefefe';
 export const ALBUM_IMG_SIZE = 64;
@@ -79,12 +84,13 @@ export const theme = {
   },
   player: {
     alignItems: 'center',
-    backgroundColor: DARK_GREY_COLOR,
     flex: 1,
     width: '100%',
     height: '100%',
+    paddingBottom: multiplySize(3, LARGE_SIZE),
     header: {
-      backgroundColor: DARK_GREY_COLOR,
+      backgroundColor: 'rgba(52, 52, 52, 0)',
+      borderBottomWidth: 0,
     },
     hidebutton: {
       width: LARGE_SIZE,
@@ -106,8 +112,7 @@ export const theme = {
       textAlign: 'center',
     },
     album: {
-      flex: 2,
-      backgroundColor: DARK_GREY_COLOR,
+      flex: 6,
       width: '100%',
       alignItems: 'center',
       justifyContent: 'center',
@@ -123,9 +128,12 @@ export const theme = {
     trackinfo: {
       flexDirection: 'row',
       width: '100%',
+      minHeight: 80,
       paddingLeft: multiplySize(2, LARGE_SIZE),
       paddingRight: multiplySize(2, LARGE_SIZE),
       justifyContent: 'space-between',
+      alignItems: 'flex-end',
+      flex: 1,
       text: {
         trackname: {
           color: LIGHT_GREY_COLOR,
@@ -146,12 +154,12 @@ export const theme = {
       },
     },
     slider: {
-      flex: 1,
       paddingLeft: multiplySize(2, LARGE_SIZE),
       paddingRight: multiplySize(2, LARGE_SIZE),
       alignItems: 'stretch',
       justifyContent: 'center',
       width: '100%',
+      flex: 1,
       thumb: {
         backgroundColor: '#FFF',
         width: MEDIUM_SIZE,
@@ -178,41 +186,21 @@ export const theme = {
     },
     controls: {
       flexDirection: 'row',
-      height: 100,
-      shuffle: {
-        flex: 1,
-        image: {
-          width: 25,
-          height: 25,
-        },
+      flex: 1,
+      paddingLeft: multiplySize(2, LARGE_SIZE),
+      paddingRight: multiplySize(2, LARGE_SIZE),
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      width: '100%',
+      minHeight: 80,
+      button: {
+        justifyContent: 'center',
+        alignItems: 'center',
       },
-      previos: {
-        flex: 1,
-        image: {
-          width: 25,
-          height: 25,
-        },
-      },
-      play: {
-        flex: 1,
-        image: {
-          width: 25,
-          height: 25,
-        },
-      },
-      next: {
-        flex: 1,
-        image: {
-          width: 25,
-          height: 25,
-        },
-      },
-      repeat: {
-        flex: 1,
-        image: {
-          width: 25,
-          height: 25,
-        },
+      buttonBig: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 80,
       },
     },
   },
@@ -271,7 +259,7 @@ export const theme = {
     paddingRight: SMALL_SIZE,
     paddingTop: XLARGE_SIZE,
     scroll: {
-      marginBottom: ALBUM_IMG_SIZE + MEDIUM_SIZE,
+      marginBottom: PLAYERBAR_HEIGHT,
     },
     sectionHeader: {
       fontSize: multiplySize(2, SMALL_SIZE),

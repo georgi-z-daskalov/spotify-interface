@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, ViewStyle, Modal} from 'react-native';
+import {ViewStyle, Modal} from 'react-native';
 import {ThemeProvider, Theme} from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import {RootState} from '../reducers/index';

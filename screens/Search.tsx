@@ -1,43 +1,77 @@
 import React from 'react';
-import {View, Text, Button, StyleSheet} from 'react-native';
-import auth from '@react-native-firebase/auth';
-import {goToLogIn, navPushTo} from '../components/navigation';
+import {Provider} from 'react-redux';
+import {store} from '../reducers/index';
+import {ScrollView, ViewStyle, Platform} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+import {Button, Header, Input} from 'react-native-elements';
+import recent_searches from '../assets/mock_server/recently_played';
+import {theme, COLOR_START_PLAYER, COLOR_END_PLAYER} from '../styles/theme';
+import {Navigation} from 'react-native-navigation';
+import {SearchTile} from '../components/SearchTile';
 import {IBaseComponent} from '../types/screens';
+import ArrowLeftIcon from '../components/svg/ArrowLeftIcon';
+import PlayerBar from '../components/PlayerBar';
+import Player from './Player';
 
 export default class Search extends React.Component<IBaseComponent> {
-  static get options() {
-    return {
-      topBar: {
-        title: {
-          text: 'Home',
-        },
-      },
-    };
-  }
-  logout = () => {
-    auth()
-      .signOut()
-      .then(() => goToLogIn())
-      .catch(error => console.log('error', error));
+  goBack = () => {
+    Navigation.pop(this.props.componentId);
   };
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Hello from Home screen.</Text>
-        <Button onPress={this.logout} title="Sign Out" />
-        <Button
-          onPress={() => navPushTo(this.props.componentId, 'Screen2')}
-          title="View next screen"
-        />
-      </View>
+      <Provider store={store}>
+        <LinearGradient
+          start={{x: 0, y: 0}}
+          end={{x: 0, y: 0.75}}
+          colors={[COLOR_START_PLAYER, COLOR_END_PLAYER]}
+          style={theme.player as ViewStyle}>
+          <Header
+            placement="left"
+            statusBarProps={{translucent: true}}
+            containerStyle={
+              [
+                Platform.select({
+                  android: Platform.Version <= 20 ? {paddingTop: 0, height: 56} : {paddingTop: 0, height: 44},
+                }),
+                theme.search.top,
+              ] as ViewStyle
+            }
+            leftComponent={
+              <Button
+                style={theme.search.back as ViewStyle}
+                icon={<ArrowLeftIcon />}
+                type="clear"
+                onPress={this.goBack}
+              />
+            }
+            centerComponent={
+              <Input
+                inputContainerStyle={theme.search.inputcontainer}
+                inputStyle={theme.search.input}
+                containerStyle={theme.search.inputcontainer}
+              />
+            }
+          />
+          <ScrollView contentContainerStyle={[theme.browsegenres.container, theme.search.scroll] as ViewStyle}>
+            {recent_searches.items.map((track, index) => {
+              const albumImg = track.track.album.images.find(img => img.height === 64);
+              const albumImgSrc = albumImg ? {uri: albumImg.url} : require('../assets/img/album.jpg');
+
+              return (
+                <SearchTile
+                  key={index + track.track.name}
+                  album={track.track.album.name}
+                  text={track.track.name}
+                  image={albumImgSrc}
+                />
+              );
+            })}
+          </ScrollView>
+          <PlayerBar />
+          <Player />
+        </LinearGradient>
+      </Provider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});

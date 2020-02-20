@@ -65,9 +65,7 @@ const getListType = (list: string): HomeListTypes => {
   }
 };
 
-export default class RenderHomeList extends React.Component<
-  IRenderHomeListProps
-> {
+export default class RenderHomeList extends React.Component<IRenderHomeListProps> {
   getRecentlyPlayedItems = (item: {track: ITrack}) => {
     const {name, artists, album} = item.track;
     return {
@@ -140,18 +138,14 @@ export default class RenderHomeList extends React.Component<
   renderHomeList(homeListType: IHomeListProps, listType: string) {
     return (
       <View key={listType} style={theme.homeSection}>
-        <Text style={theme.homeSection.sectionHeader as ViewStyle}>
-          {homeListType.title}
-        </Text>
+        <Text style={theme.homeSection.sectionHeader as ViewStyle}>{homeListType.title}</Text>
         <FlatList
           style={theme.homeSection.list}
           showsHorizontalScrollIndicator={false}
           horizontal={true}
           keyExtractor={(item, index) => index + JSON.stringify(item)}
           data={homeListType.items}
-          renderItem={({item}: {item: IHomeListItemProps}) => (
-            <HomeListItem {...item} />
-          )}
+          renderItem={({item}: {item: IHomeListItemProps}) => <HomeListItem {...item} />}
         />
       </View>
     );
@@ -160,9 +154,7 @@ export default class RenderHomeList extends React.Component<
   render() {
     return (
       <ScrollView style={theme.homeSection.scroll}>
-        {this.props.homeLists.map((list: string) =>
-          this.getHomeListProps(list),
-        )}
+        {this.props.homeLists.map((list: string) => this.getHomeListProps(list))}
       </ScrollView>
     );
   }

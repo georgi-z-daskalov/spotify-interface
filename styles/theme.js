@@ -289,4 +289,109 @@ export const theme = {
       },
     },
   },
+  browsegenres: {
+    container: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'space-between',
+      paddingTop: multiplySize(4, LARGE_SIZE),
+      paddingBottom: PLAYERBAR_HEIGHT,
+      paddingLeft: LARGE_SIZE,
+      paddingRight: LARGE_SIZE,
+    },
+    tile: {
+      backgroundColor: PRIMARY_COLOR,
+      width: '48%',
+      minWidth: 150,
+      minHeight: 110,
+      marginTop: LARGE_SIZE,
+      borderRadius: 3,
+      overflow: 'hidden',
+      paddingTop: LARGE_SIZE,
+      paddingLeft: SMALL_SIZE,
+    },
+    tileimage: {
+      width: 85,
+      height: 85,
+      transform: [{rotate: '30deg'}],
+      position: 'absolute',
+      right: -20,
+      bottom: 0,
+    },
+    tiletext: {
+      color: LIGHT_GREY_COLOR,
+      fontWeight: 'bold',
+      fontSize: LARGE_SIZE,
+    },
+    top: {
+      width: '100%',
+      text: {
+        color: PRIMARY_TEXT_COLOR,
+        fontSize: multiplySize(2, XLARGE_SIZE),
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginBottom: multiplySize(2, LARGE_SIZE),
+      },
+      button: {
+        height: 50,
+      },
+      buttonContainer: {
+        marginBottom: 0,
+      },
+      icon: {
+        marginRight: 20,
+      },
+      search: {
+        color: DARK_GREY_COLOR,
+        fontSize: LARGE_SIZE,
+      },
+    },
+  },
+  search: {
+    scroll: {
+      paddingTop: MEDIUM_SIZE,
+      paddingBottom: LARGE_SIZE,
+    },
+    top: {
+      width: '100%',
+      backgroundColor: COLOR_END_PLAYER,
+      borderBottomWidth: 0,
+      justifyContent: 'space-around',
+    },
+    back: {
+      height: '100%',
+      justifyContent: 'center',
+    },
+    input: {
+      color: LIGHT_GREY_COLOR,
+      fontSize: LARGE_SIZE,
+      marginBottom: 0,
+    },
+    inputcontainer: {
+      borderBottomWidth: 0,
+    },
+  },
+  searchtile: {
+    flexDirection: 'row',
+    width: '100%',
+    marginBottom: MEDIUM_SIZE,
+    tileimage: {
+      width: 50,
+      height: 50,
+    },
+    info: {
+      marginLeft: MEDIUM_SIZE,
+      justifyContent: 'flex-end',
+      song: {
+        marginTop: SMALL_SIZE,
+        marginBottom: 3,
+        fontSize: LARGE_SIZE,
+        color: PRIMARY_TEXT_COLOR,
+      },
+      artist: {
+        fontSize: SMALL_SIZE,
+        color: LIGHT_GREY_COLOR,
+      },
+    },
+  },
 };

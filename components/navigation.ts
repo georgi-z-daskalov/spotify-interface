@@ -1,5 +1,5 @@
 import {Navigation} from 'react-native-navigation';
-import {DARK_GREY_COLOR, PRIMARY_TEXT_COLOR, MEDIUM_GREY_COLOR} from '../styles/theme';
+import {DARK_GREY_COLOR, PRIMARY_TEXT_COLOR} from '../styles/theme';
 
 export const goTo = (componentName: string): void => {
   Navigation.setRoot({
@@ -45,8 +45,21 @@ export const goToHome = () =>
             },
           },
           {
-            component: {
-              name: 'Search',
+            stack: {
+              children: [
+                {
+                  component: {
+                    name: 'Browse',
+                    options: {
+                      topBar: {
+                        visible: false,
+                        drawBehind: true,
+                        animate: false,
+                      },
+                    },
+                  },
+                },
+              ],
               options: {
                 bottomTab: {
                   text: 'Search',
@@ -84,7 +97,43 @@ export const goToForgotPass = () => goTo('ForgottenPassword');
 export const navPushTo = (componentId: string, componentName: string): void => {
   Navigation.push(componentId, {
     component: {
+      id: componentName,
       name: componentName,
+      options: {
+        topBar: {
+          visible: false,
+          drawBehind: true,
+          animate: false,
+        },
+        animations: {
+          pop: {
+            waitForRender: true,
+            enabled: true,
+            content: {
+              y: {
+                from: 0,
+                to: 1000,
+                duration: 400,
+                startDelay: 0,
+                interpolation: 'accelerate',
+              },
+            },
+          },
+          push: {
+            waitForRender: true,
+            enabled: true,
+            content: {
+              y: {
+                from: 1000,
+                to: 1,
+                duration: 400,
+                startDelay: 0,
+                interpolation: 'accelerate',
+              },
+            },
+          },
+        },
+      },
     },
   });
 };

@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {WebView} from 'react-native-webview';
 import {spotifyApi, scopes} from '../api/index';
 import {View, Text} from 'react-native';
+import {REDIRECT_URL} from 'react-native-dotenv';
 
 export const SpotifyAuth = () => {
   const [authorizeURL, setAuthURL] = useState('');
@@ -11,7 +12,8 @@ export const SpotifyAuth = () => {
   const getAuthCode = (): void => {
     if (authorizeURL && !authorizeCode && isMounted) {
       console.log('getAuthCode', authorizeURL);
-      fetch('http://10.10.63.191:8888/acc')
+      console.log('REDIRECT_URL', REDIRECT_URL);
+      fetch(REDIRECT_URL + '/acc')
         .then(response => response.json())
         .then(responseJson => {
           if (responseJson.code) {

@@ -1,4 +1,5 @@
 import SpotifyWebApi from 'react-native-spotify-web-api';
+import {CLIENT_ID, CLIENT_SECRET, REDIRECT_URL} from 'react-native-dotenv';
 
 export const scopes = [
   'user-read-private',
@@ -24,7 +25,7 @@ export const scopes = [
 ];
 
 export const spotifyApi = new SpotifyWebApi({
-  clientId: '911f6bd56b5b49caa2ac9eb4dfacc80f',
-  clientSecret: '1769e354f9fd495fb673bc85588471e8',
-  redirectUri: 'http://10.10.63.191:8888',
+  clientId: CLIENT_ID,
+  clientSecret: CLIENT_SECRET,
+  redirectUri: REDIRECT_URL,
 });

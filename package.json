@@ -20,6 +20,7 @@
     "@types/react-test-renderer": "^16.9.2",
     "react": "16.9.0",
     "react-native": "0.61.5",
+    "react-native-dotenv": "^0.2.0",
     "react-native-elements": "^1.2.7",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-navigation": "^4.8.3",

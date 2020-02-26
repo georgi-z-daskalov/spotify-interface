@@ -35,7 +35,6 @@ export default class Home extends React.Component<IBaseComponent> {
             angle={145}
             angleCenter={{x: 0.5, y: 0.5}}
             style={theme.container as ViewStyle}>
-            <SpotifyAuth />
             <RenderHomeList homeLists={getConfigHomeList()} />
             <PlayerBar />
             <Player />

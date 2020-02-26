@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, ViewStyle} from 'react-native';
 import auth from '@react-native-firebase/auth';
-import {goToSignUp, goToHome, goToForgotPass} from '../components/navigation';
+import {goToSignUp, goToForgotPass, goTo} from '../components/navigation';
 import {IBaseComponent, IAuthState} from '../types/screens';
 import {Button, Input, Text, ThemeProvider, Theme} from 'react-native-elements';
 import {theme} from '../styles/theme';
@@ -21,7 +21,7 @@ export default class Login extends React.Component<IBaseComponent, IAuthState> {
     const {email, password} = this.state;
     auth()
       .signInWithEmailAndPassword(email, password)
-      .then(() => goToHome())
+      .then(() => goTo('SpotifyAuth'))
       .catch(error => this.setState({errorMessage: error.message}));
   };
 

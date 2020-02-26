@@ -1,12 +1,12 @@
 import React from 'react';
 import {View, Text, ActivityIndicator, StyleSheet} from 'react-native';
 import auth from '@react-native-firebase/auth';
-import {goToHome, goToLogIn} from '../components/navigation';
+import {goToLogIn, goTo} from '../components/navigation';
 
 export default class Loading extends React.Component {
   componentDidMount() {
     auth().onAuthStateChanged(user => {
-      user ? goToHome() : goToLogIn();
+      user ? goTo('SpotifyAuth') : goToLogIn();
     });
   }
   render() {

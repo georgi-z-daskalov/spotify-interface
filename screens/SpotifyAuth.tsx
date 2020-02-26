@@ -1,69 +1,83 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {WebView} from 'react-native-webview';
 import {spotifyApi, scopes} from '../api/index';
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
 import {REDIRECT_URL} from 'react-native-dotenv';
+import {Button} from 'react-native-elements';
+import {goToHome} from '../components/navigation';
 
-export const SpotifyAuth = () => {
-  const [authorizeURL, setAuthURL] = useState('');
-  const [authorizeCode, setAuthCode] = useState('');
-  let isMounted: boolean = true;
+interface ISpotifyAuthState {
+  authorizeURL: string;
+  authorizeCode: string;
+}
 
-  const getAuthCode = (): void => {
-    if (authorizeURL && !authorizeCode && isMounted) {
+export default class SpotifyAuth extends React.PureComponent {
+  _isMounted = false;
+  state: ISpotifyAuthState = {
+    authorizeURL: '',
+    authorizeCode: '',
+  };
+
+  getAuthCode = (): void => {
+    const {authorizeCode, authorizeURL} = this.state;
+    if (!authorizeCode) {
       console.log('getAuthCode', authorizeURL);
       console.log('REDIRECT_URL', REDIRECT_URL);
       fetch(REDIRECT_URL + '/acc')
         .then(response => response.json())
         .then(responseJson => {
           if (responseJson.code) {
-            setAuthCode(responseJson.code);
-            spotifyApi.authorizationCodeGrant(responseJson.code).then(
-              function(data: any) {
+            spotifyApi
+              .authorizationCodeGrant(responseJson.code)
+              .then(data => {
+                console.log('responseJson.code', responseJson.code);
+                console.log('data access_token', data.body.access_token);
                 // Set the access token on the API object to use it in later calls
+
                 spotifyApi.setAccessToken(data.body['access_token']);
                 spotifyApi.setRefreshToken(data.body['refresh_token']);
-
-                spotifyApi
-                  .getMyTopArtists({limit: 50})
-                  .then(data => console.log('data', data.body))
-                  .catch(error => console.log('error', error));
-              },
-              function(err: any) {
-                console.log('Something went wrong grant auth!', err);
-              },
-            );
+                if (this._isMounted) {
+                  this.setState(
+                    {
+                      authorizeCode: responseJson.code,
+                    },
+                    goToHome,
+                  );
+                }
+              })
+              .catch(err => {
+                console.log('Something went wrong with grant auth!', err);
+              });
           }
         })
         .catch(error => {
           console.error(error);
         });
-    } else {
-      getAuthCode();
     }
   };
 
-  useEffect(() => {
+  componentDidMount() {
+    this._isMounted = true;
     const state = 'some-state-of-my-choice';
-    setAuthURL(spotifyApi.createAuthorizeURL(scopes, state));
-  }, []);
+    this.setState({
+      authorizeURL: spotifyApi.createAuthorizeURL(scopes, state),
+    });
+  }
 
-  useEffect(() => {
-    if (authorizeURL && !authorizeCode) {
-      getAuthCode();
-    }
+  componentWillUnmount() {
+    this._isMounted = false;
+  }
 
-    return () => {
-      isMounted = false;
-    };
-  }, [authorizeURL, authorizeCode]);
+  render() {
+    const {authorizeURL, authorizeCode} = this.state;
 
-  console.log('authorizeCode', authorizeCode);
-  console.log('authorizeURL', authorizeURL);
-
-  return authorizeURL && !authorizeCode ? (
-    <View style={{width: '100%', height: '100%'}}>
-      <WebView source={{uri: authorizeURL}} />
-    </View>
-  ) : null;
-};
+    console.log('authorizeCode', authorizeCode);
+    console.log('authorizeURL', authorizeURL);
+    return (
+      <View style={{width: '100%', height: '100%'}}>
+        <WebView source={{uri: authorizeURL}} />
+        <Button disabled={!authorizeURL} onPress={this.getAuthCode} title="Go to app" />
+      </View>
+    );
+  }
+}

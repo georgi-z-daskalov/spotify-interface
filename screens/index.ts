@@ -8,4 +8,5 @@ export function registerScreens() {
   Navigation.registerComponent('ForgottenPassword', () => require('./ForgottenPassword').default);
   Navigation.registerComponent('SignUp', () => require('./SignUp').default);
   Navigation.registerComponent('Search', () => require('./Search').default);
+  Navigation.registerComponent('SpotifyAuth', () => require('./SpotifyAuth').default);
 }
